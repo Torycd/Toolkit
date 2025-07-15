@@ -8,7 +8,6 @@ const FunctionTool = () => {
     console.log(data);
   }
   //   To delete an item from a list
-
   function deleteItem(id){
     setData((itemExisting) => itemExisting.filter((eachItem) => eachItem.id !== id))
   }
