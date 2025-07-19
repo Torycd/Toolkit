@@ -32,6 +32,7 @@ function reducer(state, action) {
       title: action.payload,
     };
 
+    console.log(newData)
     return [...state, newData];
   }
 
