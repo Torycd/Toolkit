@@ -26,18 +26,31 @@ const TRAVELLIST = [
 
 function reducer(state, action) {
   // action type is very important the types we have is for delete and add
-  if (action.type === "add") {
-    const newData = {
-      id: Math.random().toFixed(3),
-      title: action.payload,
-    };
+  // if (action.type === "add") {
+  //   const newData = {
+  //     id: Math.random().toFixed(3),
+  //     title: action.payload,
+  //   };
 
-    console.log(newData)
-    return [...state, newData];
-  }
+  //   console.log(newData)
+  //   return [...state, newData];
+  // }
 
-  if (action.type === "delete") {
-    return state.filter((item) => item.id !== action.payload);
+  // if (action.type === "delete") {
+  //   return state.filter((item) => item.id !== action.payload);
+  // }
+
+  switch (action.type) {
+    // for case where they will be delearation or making a new variable we have to use  {}
+    case "add": {
+      const newData = { id: Math.random().toFixed(3), title: action.payload };
+      return [...state, newData];
+    }
+    case "delete":
+      return state.filter((item) => item.id !== action.payload);
+
+    default:
+      throw new Error("error");
   }
 }
 
@@ -53,6 +66,7 @@ const StateGuideToReducer = () => {
   function delHandler(id) {
     dispatch({ type: "delete", payload: id });
   }
+
   return (
     <div className="container">
       <h1 className="heading">My Travel Wishlist</h1>
