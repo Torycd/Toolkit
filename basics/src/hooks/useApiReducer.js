@@ -7,18 +7,15 @@ function reducer(state, action) {
     case "success":
       return { ...state, loading: false, data: action.payload };
     case "failure":
-      return { ...state };
+      return { ...state, error: action.payload };
     default:
       return state;
   }
 }
-
 export const useApiReducer = (url, callback) => {
   const intitialState = { loading: false, error: "", data: [] };
-
   const [state, dispatch] = useReducer(reducer, intitialState);
   const { loading, error, data } = state;
-
   useEffect(() => {
     async function handleApi() {
       callback?.();
@@ -28,8 +25,8 @@ export const useApiReducer = (url, callback) => {
         if (!response.ok) {
           throw new Error("Something went wrong");
         }
-        const data = await response.json();
-        dispatch({ type: "success", payload: data });
+        const result = await response.json();
+        dispatch({ type: "success", payload: result });
       } catch (err) {
         dispatch({ type: "failure", payload: err.message });
       }
