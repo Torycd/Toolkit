@@ -25,6 +25,7 @@ const TRAVELLIST = [
 ];
 
 function reducer(state, action) {
+  // action type is very important the types we have is for delete and add
   if (action.type === "add") {
     const newData = {
       id: Math.random().toFixed(3),
@@ -35,8 +36,7 @@ function reducer(state, action) {
   }
 
   if (action.type === "delete") {
-    const id = action.payload;
-    return state.filter((item) => item.id !== id);
+    return state.filter((item) => item.id !== action.payload);
   }
 }
 
